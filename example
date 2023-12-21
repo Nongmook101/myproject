@@ -1,0 +1,44 @@
+const productList = document.getElementById('product-list')
+
+function addNewProduct() {
+  const item = document.getElementById('product-input')
+
+  if(item.value === '') return
+
+  const productName = document.createElement('div')
+  productName.setAttribute('id', item.value)
+  productName.setAttribute('class', 'product-item')
+
+  const itemName = document.createElement('p')
+  itemName.textContent = item.value
+
+  const deleteButton = document.createElement('button')
+  deleteButton.textContent = 'remove'
+
+  productName.appendChild(itemName)
+  productName.appendChild(deleteButton)
+  deleteButton.addEventListener('click', () => {
+    removeProduct(productName.id)
+  })
+  productList.appendChild(productName)
+  item.value = ""
+
+}
+
+function removeProduct(productId) {
+  const removeItem = document.getElementById(productId)
+  removeItem.remove()
+}  
+
+function removeAllProduct() {
+  productList.innerHTML = ''
+}
+
+function registerEvent() {
+  const addButton = document.getElementById("add-button")
+  addButton.addEventListener('click', addNewProduct)
+  const removeAllButton = document.getElementById("removeAll-button")
+  removeAllButton.addEventListener('click', removeAllProduct)
+}
+
+registerEvent()
